@@ -34,10 +34,9 @@ const Header = () => {
     <>
     <header className=" px-4 h-14 sticky top-0 inset-x-0 w-full bg-background/40 backdrop-blur-lg border-b border-border z-50">
     <Container reverse>
-      <nav className="py-4 flex justify-between items-center h-full">
+      <nav className="flex items-center justify-between  h-full mx-auto md:max-w-screen-xl">
         <Link to="/">
-          {/* <img src="/logo.png" className="h-20" alt="Hirrd Logo" /> */}
-          <h1>Logo</h1>
+          <h1 className="text-3xl font-bold">K</h1>
         </Link>
 
         <div className="flex gap-8">
@@ -48,17 +47,19 @@ const Header = () => {
           </SignedOut>
           <SignedIn>
             {user?.unsafeMetadata?.role === "recruiter" && (
-              <Link to="/post-job">
-                <Button variant="destructive" className="rounded-full">
-                  <PenBox size={20} className="mr-2" />
-                  Post a Job
-                </Button>
-              </Link>
+              <div className="flex flex-row items-center">
+                            <Link to="/post-job">
+                
+                  <PenBox  className="" />
+                
+              </Link>  
+              </div>
+
             )}
             <UserButton
               appearance={{
                 elements: {
-                  avatarBox: "w-10 h-10",
+                  avatarBox: "w-6 h-6",
                 },
               }}
             >
