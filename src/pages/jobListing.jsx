@@ -73,94 +73,104 @@ const JobListing = () => {
   }
 
   return (
-    <div className="">
-      <h1 className="gradient-title font-extrabold text-3xl  text-center pb-4 mt-4">
-        Latest Jobs
-      </h1>
-      <form
-        onSubmit={handleSearch}
-        className="h-14 flex flex-row w-full gap-2 items-center mb-3"
-      >
-        <Input
-          type="text"
-          placeholder="Search Jobs by Title.."
-          name="search-query"
-          className="h-full flex-1  px-4 text-md"
-        />
-        <Button type="submit" className="h-full sm:w-28" variant="blue">
-          Search
-        </Button>
-      </form>
+<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<header className="text-left mb-8 mt-4">
+    <h1 className="text-gray-900 dark:text-gray-100 font-semibold text-2xl sm:text-3xl tracking-wide">
+      Latest Jobs
+    </h1>
+    <p className="mt-1 text-gray-500 dark:text-gray-400 text-sm sm:text-base max-w-md">
+      Explore thousands of job listings or find the perfect candidate.
+    </p>
+  </header>
 
-      <div className="flex flex-col sm:flex-row gap-2">
-        <Select value={location} onValueChange={(value) => setLocation(value)}>
-          <SelectTrigger>
-            <SelectValue placeholder="Filter by Location" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              {State.getStatesOfCountry("IN").map(({ name }) => {
-                return (
-                  <SelectItem key={name} value={name}>
-                    {name}
-                  </SelectItem>
-                );
-              })}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
+  <form
+    onSubmit={handleSearch}
+    className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 mb-6"
+    aria-label="Job search form"
+  >
+    <Input
+      type="text"
+      name="search-query"
+      placeholder="Search jobs by title..."
+      className="flex-grow h-12 rounded-md border border-gray-300 dark:border-gray-700 px-4 text-base focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition"
+      aria-label="Search jobs by title"
+    />
+    <Button
+      type="submit"
+      variant="blue"
+      className="w-full sm:w-36 h-12 rounded-md text-white font-semibold shadow-md hover:shadow-lg transition"
+      aria-label="Search jobs"
+    >
+      Search
+    </Button>
+  </form>
 
-        <Select
-          value={company_id}
-          onValueChange={(value) => setCompany_id(value)}
-        >
-          <SelectTrigger>
-            <SelectValue placeholder="Filter by Company" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              {companies?.map(({ name, id }) => {
-                return (
-                  <SelectItem key={name} value={id}>
-                    {name}
-                  </SelectItem>
-                );
-              })}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-        <Button
-          className="sm:w-1/2"
-          variant="destructive"
-          onClick={clearFilters}
-        >
-          Clear Filters
-        </Button>
-      </div>
+  <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 mb-8">
+    <Select value={location} onValueChange={setLocation} className="flex-grow sm:max-w-xs">
+      <SelectTrigger className="rounded-md border border-gray-300 dark:border-gray-700 px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-primary transition">
+        <SelectValue placeholder="Filter by Location" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>
+          {State.getStatesOfCountry("IN").map(({ name }) => (
+            <SelectItem key={name} value={name}>
+              {name}
+            </SelectItem>
+          ))}
+        </SelectGroup>
+      </SelectContent>
+    </Select>
 
-      {loadingJobs && (
-        <BarLoader className="mt-4" width={"100%"} color="#36d7b7" />
-      )}
+    <Select value={company_id} onValueChange={setCompany_id} className="flex-grow sm:max-w-xs">
+      <SelectTrigger className="rounded-md border border-gray-300 dark:border-gray-700 px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-primary transition">
+        <SelectValue placeholder="Filter by Company" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>
+          {companies?.map(({ name, id }) => (
+            <SelectItem key={id} value={id}>
+              {name}
+            </SelectItem>
+          ))}
+        </SelectGroup>
+      </SelectContent>
+    </Select>
 
-      {loadingJobs === false && (
-        <div className="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {jobs?.length ? (
-            jobs.map((job) => {
-              return (
-                <JobCard
-                  key={job.id}
-                  job={job}
-                  onJobAction={fnJobs}
-                  savedInit={job?.saved?.length > 0}
-                />
-              );
-            })
-          ) : (
-            <div>No Jobs Found 😢</div>
-          )}
-        </div>
+    <Button
+      variant="destructive"
+      onClick={clearFilters}
+      className="w-full sm:w-40 h-12 rounded-md font-semibold transition hover:bg-red-700"
+      aria-label="Clear filters"
+    >
+      Clear Filters
+    </Button>
+  </div>
+
+  {loadingJobs && (
+    <BarLoader className="mx-auto" width="100%" color="#36d7b7" />
+  )}
+
+  {!loadingJobs && (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {jobs?.length ? (
+        jobs.map((job) => (
+          <JobCard
+            key={job.id}
+            job={job}
+            onJobAction={fnJobs}
+            savedInit={job?.saved?.length > 0}
+          />
+        ))
+      ) : (
+        <p className="text-center text-gray-500 dark:text-gray-400 text-lg mt-12">
+          No jobs found 😢
+        </p>
       )}
     </div>
+  )}
+</div>
+
+
   );
 };
 
