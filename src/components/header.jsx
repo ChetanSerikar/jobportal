@@ -10,6 +10,7 @@ import {
 import { Button } from "./ui/button";
 import { BriefcaseBusiness, Heart, PenBox } from "lucide-react";
 import Container from "./Container";
+import { ModeToggle } from "./mode-toggle";
 
 const Header = () => {
   const [showSignIn, setShowSignIn] = useState(false);
@@ -45,6 +46,7 @@ const Header = () => {
               Login
             </Button>
           </SignedOut>
+          <ModeToggle/>
           <SignedIn>
             {user?.unsafeMetadata?.role === "recruiter" && (
               <div className="flex flex-row items-center">

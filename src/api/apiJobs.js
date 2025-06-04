@@ -166,3 +166,21 @@ export async function addNewJob(token, _, jobData) {
 
   return data;
 }
+
+// edit job
+export async function editJob(token, { job_id }, jobData) {
+  const supabase = await supabaseClient(token);
+
+  const { data, error } = await supabase
+    .from("jobs")
+    .update(jobData)
+    .eq("id", job_id)
+    .select();
+
+  if (error) {
+    console.error("Error updating job:", error);
+    throw new Error("Error Updating Job");
+  }
+
+  return data;
+}

@@ -85,7 +85,7 @@
 
 
 
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
 @tailwind utilities;
 @layer base {
@@ -195,6 +195,130 @@
 
 .gradient {
   background: conic-gradient(from 230.29deg at 51.63% 52.16%, rgb(36, 0, 255) 0deg, rgb(0, 135, 255) 67.5deg, rgb(108, 39, 157) 198.75deg, rgb(24, 38, 163) 251.25deg, rgb(54, 103, 196) 301.88deg, rgb(105, 30, 255) 360deg);
+}
+
+.lamp {
+  opacity: 1;
+  transform: translateY(-200px) rotate(180deg) scale(2) translateZ(0px);
+} */
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+  :root {
+    --gradient: linear-gradient(to top left, #f0f0f0, #e0e0e0);
+
+    --background: 0 0% 100%;         /* white */
+    --foreground: 240 10% 10%;       /* very dark gray for text */
+
+    --muted: 240 20% 95%;            /* light gray */
+    --muted-foreground: 240 10% 40%; /* muted gray text */
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 10%;
+
+    --border: 240 20% 90%;
+    --input: 240 20% 90%;
+
+    --primary: 240 5% 20%;           /* soft black / charcoal */
+    --primary-foreground: 0 0% 100%; /* white */
+
+    --secondary: 240 10% 95%;
+    --secondary-foreground: 240 5% 30%;
+
+    --accent: 240 10% 90%;
+    --accent-foreground: 240 5% 30%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --ring: 240 5% 30%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 240 5% 6%;
+    --foreground: 0 0% 100%;
+
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 10%;
+
+    --card: 240 5% 10%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 240 5% 12%;
+    --popover-foreground: 0 0% 100%;
+
+    --secondary: 240 4% 18%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 240 4% 20%;
+    --muted-foreground: 0 0% 60%;
+
+    --accent: 240 5% 15%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72.8% 40.6%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 4% 20%;
+    --input: 240 4% 20%;
+
+    --ring: 0 0% 100%;
+    --radius: 0.5rem;
+  }
+}
+
+::selection {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  background-color: hsl(var(--background));
+  scrollbar-width: thin;
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--muted-foreground));
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: hsl(var(--background));
+}
+
+.dotPattern {
+  background-image: radial-gradient(hsl(var(--muted-foreground)) 1px, transparent 1px);
+  background-size: 25px 25px;
+}
+
+.use-automation-zoom-in {
+  animation: automation-zoom-in 0.5s;
+}
+
+.card-mask {
+  background: radial-gradient(ellipse at center, hsla(var(--primary) / 0.15), transparent);
+}
+
+.gradient {
+  /* Optional: use your own brand colors or neutrals in dark/light if needed */
+  background: conic-gradient(
+    from 230.29deg at 51.63% 52.16%,
+    hsl(var(--primary)) 0deg,
+    hsl(var(--accent)) 67.5deg,
+    rgb(108, 39, 157) 198.75deg,
+    rgb(24, 38, 163) 251.25deg,
+    rgb(54, 103, 196) 301.88deg,
+    rgb(105, 30, 255) 360deg
+  );
 }
 
 .lamp {
